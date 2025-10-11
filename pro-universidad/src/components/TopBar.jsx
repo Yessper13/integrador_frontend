@@ -1,4 +1,5 @@
 import React from 'react'
+import Profile from '../img/undraw_profile.svg'
 
 export default function TopBar() {
   return (
@@ -49,7 +50,7 @@ export default function TopBar() {
         </span>
         <img
           className="img-profile rounded-circle"
-          src="img/undraw_profile.svg"
+          src={Profile}
         />
       </a>
       {/* Dropdown - User Information */}
