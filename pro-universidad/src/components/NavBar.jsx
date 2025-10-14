@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Component, useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import '../admin/css/sb-admin-2.min.css';
 import '../admin/css/sb-admin-2.css';
@@ -6,6 +6,7 @@ import '../admin/css/custom-styles.css';
 import Estadistica from "../pages/Estadistica";
 // keep activateCurrentModule for backwards compatibility if needed
 import { activateCurrentModule } from '../admin/js/sidebar.js';
+
 
 
 export default function NavBar() {
@@ -26,22 +27,22 @@ export default function NavBar() {
     const currentPage = window.location.pathname.split('/').pop();
     // map pages to collapse keys and active hrefs
     const map = {
-      'index.html': { openKey: null, href: 'index.html' },
-      'listado-estudiantes.html': { openKey: 'collapseIngreso', href: 'listado-estudiantes.html' },
-      'crear-estudiante.html': { openKey: 'collapseIngreso', href: 'crear-estudiante.html' },
-      'listado-notas.html': { openKey: 'collapseNotas', href: 'listado-notas.html' },
-      'crear-nota.html': { openKey: 'collapseNotas', href: 'crear-nota.html' },
-      'listado-historial.html': { openKey: 'collapseHistorial', href: 'listado-historial.html' },
-      'crear-historial.html': { openKey: 'collapseHistorial', href: 'crear-historial.html' },
-      'listado-familiares.html': { openKey: 'collapseFamiliar', href: 'listado-familiares.html' },
-      'crear-familiar.html': { openKey: 'collapseFamiliar', href: 'crear-familiar.html' },
-      'listado-asistencias.html': { openKey: 'collapseAsistencias', href: 'listado-asistencias.html' },
-      'crear-asistencia.html': { openKey: 'collapseAsistencias', href: 'crear-asistencia.html' },
-      'listado-bienestar.html': { openKey: 'collapseBienestar', href: 'listado-bienestar.html' },
-      'crear-bienestar.html': { openKey: 'collapseBienestar', href: 'crear-bienestar.html' },
-      'estadisticas.html': { openKey: 'collapseEstadisticas', href: 'estadisticas.html' },
-      'perfil.html': { openKey: null, href: 'perfil.html' },
-    };
+  '/': { openKey: null },
+  '/listado-estudiantes': { openKey: 'collapseIngreso' },
+  '/crear-estudiante': { openKey: 'collapseIngreso' },
+  '/listado-notas': { openKey: 'collapseNotas' },
+  '/crear-nota': { openKey: 'collapseNotas' },
+  '/listado-historial': { openKey: 'collapseHistorial' },
+  '/crear-historial': { openKey: 'collapseHistorial' },
+  '/listado-familiares': { openKey: 'collapseFamiliar' },
+  '/crear-familiar': { openKey: 'collapseFamiliar' },
+  '/listado-asistencias': { openKey: 'collapseAsistencias' },
+  '/crear-asistencia': { openKey: 'collapseAsistencias' },
+  '/listado-bienestar': { openKey: 'collapseBienestar' },
+  '/crear-bienestar': { openKey: 'collapseBienestar' },
+  '/estadisticas': { openKey: 'collapseEstadisticas' },
+  '/perfil': { openKey: null },
+};
 
     const entry = map[currentPage];
     if (entry) {
@@ -295,7 +296,7 @@ export default function NavBar() {
       >
         <div className="bg-white py-2 collapse-inner rounded">
           <h6 className="collapse-header">Acciones:</h6>
-            <Link className={`collapse-item ${activeItem === 'estadisticas.html' ? 'active' : ''}`} to="/" onClick={() => handleItemClick('estadisticas.html')}>
+            <Link className={`collapse-item ${activeItem === 'estadisticas.html' ? 'active' : ''}`} to="/" onClick={() => handleItemClick('/estadisticas')}>
               Ver Reportes
             </Link>
         </div>
