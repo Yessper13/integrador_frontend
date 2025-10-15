@@ -1,48 +1,62 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CampoEntrada from "../components/CampoEntrada";
 import Boton from "../components/Boton";
+import axios from "axios";
+import { UserContext } from "../context/UserContext";
 
 export default function FormularioLogin() {
-  const [usuario, setUsuario] = useState("");
+  const [usuarioInput, setUsuarioInput] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(false);
+
   const navigate = useNavigate();
+  const { login } = useContext(UserContext); // 👈 Contexto
 
   const manejarLogin = async () => {
+    setError("");
     setCargando(true);
 
-    const datos = [
-      { usuario: "pepito", contrasena: "123", cargo: "estadistica" },
-      { usuario: "juan", contrasena: "123", cargo: "admin" }
-    ];
-
-    if (!usuario || !contrasena) {
+    if (!usuarioInput || !contrasena) {
       setError("Por favor llena todos los campos.");
       setCargando(false);
       return;
     }
 
-    const usuarioEncontrado = datos.find(
-      (u) => u.usuario === usuario && u.contrasena === contrasena
-    );
+    try {
+      // Llamada al backend con Axios
+      const respuesta = await axios.get("http://localhost:8080/usuarios/login", {
+        params: {
+          nombre: usuarioInput,
+          contraseña: contrasena,
+        },
+      });
 
-    if (usuarioEncontrado) {
-      setError("");
-      console.log("Guardando en localStorage:", usuarioEncontrado);
-      localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));
+      const usuarioEncontrado = respuesta.data;
+      console.log("Usuario autenticado:", usuarioEncontrado);
 
-      if (usuarioEncontrado.cargo === "admin") {
-        navigate("/admin");
-      } else if (usuarioEncontrado.cargo === "estadistica") {
-        navigate("/estadistica");
+      if (usuarioEncontrado) {
+        // Guardamos en contexto y localStorage
+        login(usuarioEncontrado);
+
+        // Redirigir según el rol
+        if (usuarioEncontrado.rol === "admin") {
+          navigate("/admin");
+        } else if (usuarioEncontrado.rol === "Estudiante") {
+          navigate("/estadistica");
+        } else {
+          navigate("/");
+        }
+      } else {
+        setError("Usuario o contraseña incorrectos.");
       }
-    } else {
-      setError("Usuario o contraseña incorrectos.");
+    } catch (err) {
+      console.error("Error al iniciar sesión:", err);
+      setError("Usuario o contraseña incorrectos o servidor no disponible.");
+    } finally {
+      setCargando(false);
     }
-
-    setCargando(false);
   };
 
   return (
@@ -55,8 +69,8 @@ export default function FormularioLogin() {
         <CampoEntrada
           etiqueta="Usuario"
           tipo="text"
-          valor={usuario}
-          alCambiar={(e) => setUsuario(e.target.value)}
+          valor={usuarioInput}
+          alCambiar={(e) => setUsuarioInput(e.target.value)}
         />
 
         <CampoEntrada

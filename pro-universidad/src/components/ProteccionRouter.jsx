@@ -10,7 +10,7 @@ export default function ProteccionRouter({ cargoRequerido }) {
   }
 
   // Si se requiere un cargo específico y no coincide
-  if (cargoRequerido && usuario.cargo !== cargoRequerido) {
+  if (cargoRequerido && usuario.rol !== cargoRequerido) {
     return <Navigate to="/no-autorizado" replace />;
   }
 
