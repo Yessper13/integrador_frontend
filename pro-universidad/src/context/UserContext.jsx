@@ -1,12 +1,14 @@
 import { createContext, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 // Crear el contexto
 export const UserContext = createContext();
 
 // Proveedor de contexto
 export const UserProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [usuario, setUsuario] = useState(() => {
     const datos = localStorage.getItem("usuario");
+    
     return datos ? JSON.parse(datos) : null;
   });
 
@@ -20,6 +22,8 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setUsuario(null);
     localStorage.removeItem("usuario");
+    navigate("/");
+
   };
 
   return (
