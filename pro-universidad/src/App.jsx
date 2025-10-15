@@ -12,7 +12,7 @@ function App() {
   const sidebarWidth = '14rem'
   const topbarHeight = '56px'
 
- 
+  const rol = JSON.parse(localStorage.getItem("usuario"))?.rol;
 
   return (
     <>
@@ -30,7 +30,7 @@ function App() {
       <div style={{ marginLeft: sidebarWidth, marginTop: topbarHeight, height: `calc(100vh - ${topbarHeight})`, overflowY: 'auto', padding: '3rem' }}>
         <Routes>         
         <Route path="/" element={<FormularioLogin/>} />        
-        <Route element={<ProteccionRouter cargoRequerido="Estudiante"/>}>
+        <Route element={<ProteccionRouter cargoRequerido={rol}/>}>
         <Route path="/estadistica" element={<Estadistica/>} />
         </Route>
         <Route path="/no-autorizado" element={<NoAutorizado />} />
