@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export default function ProteccionRouter({ cargoRequerido }) {
+export default function ProteccionRouter({ rol }) {
  
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -10,7 +10,7 @@ export default function ProteccionRouter({ cargoRequerido }) {
   }
 
   // Si se requiere un cargo específico y no coincide
-  if (cargoRequerido && usuario.rol !== cargoRequerido) {
+  if (rol && usuario.rol !== rol) {
     return <Navigate to="/no-autorizado" replace />;
   }
 

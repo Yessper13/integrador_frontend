@@ -41,12 +41,16 @@ export default function FormularioLogin() {
         login(usuarioEncontrado);
 
         // Redirigir según el rol
-        if (usuarioEncontrado.rol === "admin") {
-          navigate("/admin");
+        if (usuarioEncontrado.rol === "Docente") {
+          navigate("/estadistica");
         } else if (usuarioEncontrado.rol === "Estudiante") {
           navigate("/estadistica");
-        } else {
-          navigate("/");
+        }
+        else if (usuarioEncontrado.rol === "Empresario") {
+          navigate("/estadistica");
+        }
+         else {
+          navigate("/no-autorizado");
         }
       } else {
         setError("Usuario o contraseña incorrectos.");
