@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom"
 import FormularioLogin from './pages/FormularioLogin'
 import ProteccionRouter from './components/ProteccionRouter'
 import NoAutorizado from './pages/NoAutorizado'
+import '../src/admin/css/login.css';
 
 function App() {
   // Assumptions: desktop sidebar width is 14rem (matches CSS at >=768px)
