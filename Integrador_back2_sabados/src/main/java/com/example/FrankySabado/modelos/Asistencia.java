@@ -20,7 +20,9 @@ public class Asistencia {
     @Column(name = "estado", nullable = false, unique = false)
     @Enumerated(EnumType.STRING)
     private EstadosAsistencia estado;
-
+    @Column(name = "idGrupo", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idGrupo;
     @ManyToOne
     @JoinColumn(name = "fk_estudiante", referencedColumnName = "id")
     @JsonBackReference(value = "relacionestudianteasistencia")
@@ -66,5 +68,13 @@ public class Asistencia {
 
     public void setEstado(EstadosAsistencia estado) {
         this.estado = estado;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 }
