@@ -17,7 +17,7 @@ public class AsistenciaControlador {
     AsistenciaServicio servicio;
 
     //1. Activar API para buscar asistencia por estado
-    @GetMapping
+    @GetMapping("/asistenciaEstado")
     public ResponseEntity<?> activarBuscarEstado(@PathVariable String estado) {
         try {
             return ResponseEntity
@@ -31,7 +31,7 @@ public class AsistenciaControlador {
     }
 
     //2. Activar API para buscar buscar por fecha
-    @GetMapping
+    @GetMapping("/asistenciaFecha")
     public ResponseEntity<?> activarBuscarPorFecha(@RequestBody LocalDate fecha) {
         try {
             return ResponseEntity
@@ -45,7 +45,7 @@ public class AsistenciaControlador {
     }
 
     //3. Activar API buscar por grupo
-    @GetMapping
+    @GetMapping("/asistenciaGrupo")
     public ResponseEntity<?> activarBuscarPorGrupo(@PathVariable Integer idGrupo) {
         try {
             return ResponseEntity
