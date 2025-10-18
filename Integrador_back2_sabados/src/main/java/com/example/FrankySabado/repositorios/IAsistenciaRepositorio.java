@@ -15,7 +15,7 @@ public interface IAsistenciaRepositorio extends JpaRepository<Asistencia, Intege
 
 
     //Consulta para IdAsistencia
-    List<Asistencia>findByGrupo(Integer idGrupo);
+    List<Asistencia>findByIdGrupo(Integer idGrupo);
 
 
 }

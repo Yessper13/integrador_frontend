@@ -13,7 +13,7 @@ public interface IMapaAsistencia {
 
 
     @Mapping(source = "estudiante", target = "estudiante")
-    @Mapping(source = "asistencia", target = "asistencia")
+    @Mapping(source = "estado", target = "estado")
     @Mapping(source = "observacion", target = "observacion")
     @Mapping(source = "fecha", target = "fecha")
     @Mapping(source = "idGrupo", target = "idGrupo")
