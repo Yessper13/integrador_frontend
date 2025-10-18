@@ -1,28 +1,32 @@
 package com.example.FrankySabado.servicios;
 
 import com.example.FrankySabado.modelos.Asistencia;
+import com.example.FrankySabado.modelos.dtos.AsistenciaDTO;
+import com.example.FrankySabado.modelos.mapas.IMapaAsistencia;
+import com.example.FrankySabado.repositorios.IAsistenciaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.LocalDate;
 
 public class AsistenciaServicio {
     @Autowired
     private IAsistenciaRepositorio repositorio;
     @Autowired
-    private IMapaServicio mapa;
-    private IAsistenciaRepositorio this.repo;
+    private IMapaAsistencia mapa;
 
     //BUSCAR POR ESTADO DE ASISTENCIAS
     public AsistenciaDTO buscarEstado(String estado) throws Exception{
         try {
-            return this.mapa.convertirModeloADto(this.repositorio.findByEstado(estado));
+            return this.mapa.convertirModeloADTO((Asistencia) this.repositorio.findByEstado(estado));
         } catch (Exception error){
             throw new Exception("Error" + error.getMessage());
         }
     }
 
     //BUSCAR CON FILTRO DE FECHA
-    public AsistenciaDTO buscarPorFecha(String fecha) throws Exception{
+    public AsistenciaDTO buscarPorFecha(LocalDate fecha) throws Exception{
         try {
-            return this.mapa.convertirModeloADto(this.repositorio.findByFecha(fecha));
+            return this.mapa.convertirModeloADTO((Asistencia) this.repositorio.findByFecha(fecha));
         } catch (Exception error){
             throw new Exception("Error" + error.getMessage());
         }
@@ -31,7 +35,7 @@ public class AsistenciaServicio {
     //BUSCAR CON FILTRO DE ID GRUPO
     public AsistenciaDTO buscarPorGrupo(Integer idGrupo) throws Exception{
         try {
-            return this.mapa.convertirModeloADto(this.repositorio.findByGrupo(idGrupo));
+            return this.mapa.convertirModeloADTO((Asistencia) this.repositorio.findByGrupo(idGrupo));
         } catch (Exception error){
             throw new Exception("Error" + error.getMessage());
         }
