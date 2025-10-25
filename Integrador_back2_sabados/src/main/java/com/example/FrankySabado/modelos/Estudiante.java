@@ -2,9 +2,9 @@ package com.example.FrankySabado.modelos;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "estudiantes")
@@ -13,42 +13,40 @@ public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "promedio", nullable = false, unique = false)
+
+    @Column(name = "promedio", nullable = false)
     private Double promedio;
-    @Column(name = "fechaNacimiento", nullable = false, unique = false)
+
+    @Column(name = "fechaNacimiento", nullable = false)
     private LocalDate fechaNacimiento;
 
-    //Relacionandome con 1 Usuario
+    // Relación con Usuario
     @OneToOne
     @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
     @JsonManagedReference(value = "relacionestudianteusuario")
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "estudiante")
+    // Relación con Asistencia
+    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "relacionestudianteasistencia")
-    private ArrayList<Asistencia> asistencias;
+    private List<Asistencia> asistencias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "estudiante")
-    @JsonManagedReference(value="relacionestudiantenota")
-    private ArrayList<Nota> notas;
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    // Relación con Nota
+    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "relacionestudiantenota")
+    private List<Nota> notas = new ArrayList<>();
 
     public Estudiante() {
     }
 
-    public Estudiante(Integer id, Double promedio, LocalDate fechaNacimiento) {
+    public Estudiante(Integer id, Double promedio, LocalDate fechaNacimiento, Usuario usuario) {
         this.id = id;
         this.promedio = promedio;
         this.fechaNacimiento = fechaNacimiento;
+        this.usuario = usuario;
     }
 
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -71,5 +69,29 @@ public class Estudiante {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Asistencia> getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(List<Asistencia> asistencias) {
+        this.asistencias = asistencias;
+    }
+
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
     }
 }

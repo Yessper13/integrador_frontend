@@ -7,28 +7,38 @@ import java.time.LocalDate;
 
 public class AsistenciaDTO {
 
-    private Estudiante estudiante;
+    private Integer estudiante;
     private EstadosAsistencia estado;
     private String observacion;
     private LocalDate fecha;
     private Integer idGrupo;
+    private String estudianteNombre;
 
     public AsistenciaDTO() {
     }
 
-    public AsistenciaDTO(Estudiante estudiante, EstadosAsistencia estado, String observacion, LocalDate fecha, Integer idGrupo) {
+    public AsistenciaDTO(Integer estudiante, EstadosAsistencia estado, String observacion, LocalDate fecha, Integer idGrupo, String estudianteNombre) {
         this.estudiante = estudiante;
         this.estado = estado;
         this.observacion = observacion;
         this.fecha = fecha;
         this.idGrupo = idGrupo;
+        this.estudianteNombre = estudianteNombre;
     }
 
-    public Estudiante getEstudiante() {
+    public String getEstudianteNombre() {
+        return estudianteNombre;
+    }
+
+    public void setEstudianteNombre(String estudianteNombre) {
+        this.estudianteNombre = estudianteNombre;
+    }
+
+    public Integer getEstudiante() {
         return estudiante;
     }
 
-    public void setEstudiante(Estudiante estudiante) {
+    public void setEstudiante(Integer estudiante) {
         this.estudiante = estudiante;
     }
 
