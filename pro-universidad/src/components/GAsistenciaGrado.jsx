@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import GDistribucionNotas from './GDistribucionNotas'
 
 export default function GAsistenciaGrado() {
   const [asistencias, setAsistencias] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // Nuevo: control de grupo y input
-  const [groupId, setGroupId] = useState(4);
-  const [inputGrupo, setInputGrupo] = useState(String(4));
+  const [groupId, setGroupId] = useState(101);
+  const [inputGrupo, setInputGrupo] = useState(String(101));
 
   // Función de fetch reutilizable
   const fetchAsistencias = async (id) => {
@@ -43,14 +42,13 @@ export default function GAsistenciaGrado() {
       return;
     }
     setError(null);
-    setGroupId(parsed); // disparará el useEffect y recargará los datos
+    setGroupId(parsed);
   };
 
   return (
     <>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          {/* Header con input y botón al lado */}
           <div className="d-flex align-items-center justify-content-between">
             <h6 className="m-0 font-weight-bold text-primary">Asistencia por Grado</h6>
 
@@ -76,9 +74,15 @@ export default function GAsistenciaGrado() {
           {error && <p className="text-danger">Error: {error}</p>}
           
           {!loading && !error && (
-            <div className="table-responsive">
+            <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <table className="table table-bordered">
-                <thead>
+                <thead style={{ 
+                  position: 'sticky', 
+                  top: 0, 
+                  backgroundColor: '#4e73df',
+                  color: 'white',
+                  zIndex: 1
+                }}>
                   <tr>
                     <th>Estudiante</th>
                     <th>Estado</th>
@@ -105,13 +109,16 @@ export default function GAsistenciaGrado() {
               </table>
             </div>
           )}
-
-          <div className="chart-bar">
-            <canvas id="graficoMaterias" width="400" height="200"></canvas>
-          </div>
         </div>
       </div>
-      
+
+      {/* Pasa el grupo y los datos al componente de gráfico */}
+      <GDistribucionNotas 
+        groupId={groupId}
+        asistencias={asistencias}
+        loading={loading}
+        error={error}
+      />
     </>
   )
 }

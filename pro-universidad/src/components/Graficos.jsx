@@ -9,10 +9,10 @@ export default function Graficos() {
     <div className="container-fluid px-4">
       {/* Primera fila */}
       <div className="row gx-4">
-        <div className="col-12 col-xl-6">
+        <div className="col-6 ">
           <GDistribucionNotas />
         </div>
-        <div className="col-12 col-xl-6">
+        <div className="col-6">
           <GAsistenciaGrado />
         </div>
       </div>
@@ -20,10 +20,10 @@ export default function Graficos() {
       {/* Segunda fila */}
       <div className="row gx-4 mt-4">
         <div className="col-12 col-xl-6">
-          <GBienestarTipo />
+         {/*  <GBienestarTipo /> */}
         </div>
         <div className="col-12 col-xl-6">
-          <GRendimientoMaterias />
+         {/*  <GRendimientoMaterias /> */}
         </div>
       </div>
     </div>
