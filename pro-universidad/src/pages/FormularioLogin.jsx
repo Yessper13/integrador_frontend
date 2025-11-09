@@ -49,7 +49,7 @@ const LoginRegister = () => {
         }
 
         try {
-            const respuesta = await axios.get("http://localhost:8080/usuarios/login", {
+            const respuesta = await axios.get("https://nondeducible-unnotched-ari.ngrok-free.dev/usuarios/login", {
                 params: {
                     nombre: usuarioInput,
                     contraseña: contrasena,
@@ -105,7 +105,7 @@ const LoginRegister = () => {
         try {
             console.log("Enviando datos:", registerData);
             
-            const respuesta = await axios.post("http://localhost:8080/usuarios", registerData);
+            const respuesta = await axios.post("https://nondeducible-unnotched-ari.ngrok-free.dev/usuarios", registerData);
 
             console.log("Usuario registrado:", respuesta.data);
             

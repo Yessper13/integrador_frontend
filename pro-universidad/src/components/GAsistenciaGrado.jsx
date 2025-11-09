@@ -13,7 +13,7 @@ export default function GAsistenciaGrado() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:8080/asistencias/asistenciaGrupo?idGrupo=${id}`);
+      const response = await fetch(`https://nondeducible-unnotched-ari.ngrok-free.dev/asistencias/asistenciaGrupo?idGrupo=${id}`);
       if (!response.ok) {
         const txt = await response.text();
         throw new Error(`HTTP ${response.status} - ${txt.slice(0,200)}`);
